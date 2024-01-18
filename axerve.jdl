@@ -1,0 +1,38 @@
+application {
+  config {
+    baseName myApp
+    applicationType monolith
+    serverPort 8080
+	enableTranslation false
+	skipClient true
+	clientFramework no
+	cacheProvider no
+	skipUserManagement true
+	prodDatabaseType mysql
+	serviceDiscoveryType no
+	enableHibernateCache false
+	enableSwaggerCodegen true
+	devDatabaseType h2Memory
+  }
+  entities GbsBanking
+}
+
+entity GbsBanking {
+	accountId Long required
+	creditorName String required
+	creditorAccountCode String required
+    description String
+    currency String required
+    amount Double required
+    executionDate LocalDate required
+}
+
+
+// Set pagination options
+//paginate GbsBanking with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 

@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20240118141258"
+  },
+  "applications": ["myApp"],
+  "dto": "mapstruct",
+  "entityTableName": "gbs_banking",
+  "fields": [
+    {
+      "fieldName": "accountId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "creditorName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "creditorAccountCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currency",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "executionDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "GbsBanking",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
