@@ -1,6 +1,8 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.service.dto.GbsBankingAccountCashDTO;
 import com.mycompany.myapp.service.dto.GbsBankingDTO;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,4 +55,8 @@ public interface GbsBankingService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    GbsBankingAccountCashDTO getGbsBankingAccountCash(Long accountId);
+
+    List<GbsBankingDTO> findAllByAccountIdAndExecutionDateBetween(Long accountId, LocalDate fromAccountingDate, LocalDate toAccountingDate);
 }

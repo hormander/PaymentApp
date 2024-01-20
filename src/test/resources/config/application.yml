@@ -13,6 +13,13 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+logging:
+  level:
+    ROOT: INFO
+    tech.jhipster: INFO
+    org.hibernate.SQL: INFO
+    com.mycompany.myapp: DEBUG
+
 spring:
   application:
     name: myApp

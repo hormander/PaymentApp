@@ -9,42 +9,23 @@
     <!--
         Added the entity GbsBanking.
     -->
-    <changeSet id="20240118141258-1" author="jhipster">
-        <createTable tableName="gbs_banking">
+    <changeSet id="20240117141258-1" author="jhipster">
+        <createTable tableName="accounts">
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="account_id" type="bigint"  >
-                <constraints nullable="false" />
-            </column>
-            <column name="creditor_name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="creditor_account_code" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="description" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="currency" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="amount" type="double">
-                <constraints nullable="false" />
-            </column>
-            <column name="execution_date" type="date">
+            <column name="account_id" type="bigint">
                 <constraints nullable="false" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
 
-        <createIndex tableName="gbs_banking" unique="false" indexName="gbs_banking_account_id">
+        <createIndex tableName="accounts" unique="true" indexName="accounts_account_id">
             <column name="account_id"/>
         </createIndex>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
-
     <!--
         Load sample data generated with Faker.js
         - This data can be easily edited using a CSV editor (or even MS Excel) and
@@ -53,20 +34,14 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20240118141258-1-data" author="jhipster" context="faker">
+    <changeSet id="20240117141258-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/gbs_banking.csv"
+                  file="config/liquibase/fake-data/accounts.csv"
                   separator=";"
-                  tableName="gbs_banking"
+                  tableName="accounts"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="account_id" type="numeric"/>
-            <column name="creditor_name" type="string"/>
-            <column name="creditor_account_code" type="string"/>
-            <column name="description" type="string"/>
-            <column name="currency" type="string"/>
-            <column name="amount" type="numeric"/>
-            <column name="execution_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

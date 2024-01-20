@@ -8,6 +8,13 @@
 # More information on database containers: https://www.testcontainers.org/modules/databases/
 # ===================================================================
 
+logging:
+  level:
+    ROOT: INFO
+    tech.jhipster: INFO
+    org.hibernate.SQL: INFO
+    com.mycompany.myapp: DEBUG
+
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -17,6 +24,7 @@ spring:
     hikari:
       auto-commit: false
   jpa:
+    show-sql: true
     open-in-view: false
     hibernate:
       ddl-auto: none
