@@ -48,7 +48,9 @@ src\test\java\com\mycompany\myapp\web\rest\GbsResourceIT.java
 # Comandi utili
 
 mvnw install
+
 mvnw spring-boot:run -Drun.profiles=dev (usare solo l'ambiente di sviluppo, prod non è testato)
+
 mvnw test -Dtest="GbsResourceIT"
 
 Il servizio è esposto sulla porta 8080
