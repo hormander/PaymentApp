@@ -18,12 +18,10 @@ import com.mycompany.myapp.service.dto.GbsBankingDTO;
 import com.mycompany.myapp.service.mapper.GbsBankingMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -220,6 +218,30 @@ class GbsResourceIT {
                 )
             )
             .andExpect(status().isNotFound());
+
+        assertThat(gbsBankingRepository.findAll()).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void findAllByAccountIdAndExecutionDateBetweenDatesIntervalPreconditionFailed() throws Exception {
+        int databaseSizeBeforeTest = gbsBankingRepository.findAll().size();
+        // set the field null
+
+        LocalDate from = LocalDate.of(2018, 1, 1);
+        LocalDate to = LocalDate.of(2019, 12, 31);
+
+        restGbsBankingMockMvc
+            .perform(
+                get(
+                    ENTITY_API_URL +
+                    "/gbs-banking-account-cash-v4.0?accountId={id}&fromAccountingDate={fromAccountingDate}&toAccountingDate={toAccountingDate}",
+                    ENTITY_ACCOUNT_ID,
+                    to,
+                    from
+                )
+            )
+            .andExpect(status().isPreconditionFailed());
 
         assertThat(gbsBankingRepository.findAll()).hasSize(databaseSizeBeforeTest);
     }

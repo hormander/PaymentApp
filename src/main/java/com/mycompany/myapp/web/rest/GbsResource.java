@@ -6,6 +6,7 @@ import com.mycompany.myapp.service.dto.GbsBankingDTO;
 import com.mycompany.myapp.web.rest.errors.AccountIdNotFoundException;
 import com.mycompany.myapp.web.rest.errors.Api000Exception;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import com.mycompany.myapp.web.rest.errors.DatesIntervalPreconditionFailed;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -68,8 +69,16 @@ public class GbsResource {
         @RequestParam("accountId") Long accountId,
         @RequestParam("fromAccountingDate") LocalDate fromAccountingDate,
         @RequestParam("toAccountingDate") LocalDate toAccountingDate
-    ) throws AccountIdNotFoundException {
+    ) throws AccountIdNotFoundException, DatesIntervalPreconditionFailed {
         log.debug("REST request to find all GbsBankingAccountCash for accountId : {}", accountId);
+
+        if (toAccountingDate.isBefore(fromAccountingDate)) {
+            String message = String.format("'To date' {} is less than 'from date' {}", toAccountingDate, fromAccountingDate);
+
+            log.warn(message);
+
+            throw new DatesIntervalPreconditionFailed(message);
+        }
 
         List<GbsBankingDTO> result = gbsBankingService.findAllByAccountIdAndExecutionDateBetween(
             accountId,
