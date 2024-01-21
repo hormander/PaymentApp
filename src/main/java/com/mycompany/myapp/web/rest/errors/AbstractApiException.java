@@ -1,6 +1,5 @@
 package com.mycompany.myapp.web.rest.errors;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 
@@ -8,7 +7,7 @@ public abstract class AbstractApiException extends RuntimeException {
 
     protected HttpStatus httpStatus;
 
-    protected Map<String, Object> body = new HashMap<String, Object>();
+    protected Map<String, Object> body;
 
     public AbstractApiException(final HttpStatus httpStatus, final String code, final String description) {
         super();
