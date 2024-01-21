@@ -55,6 +55,14 @@ mvnw test -Dtest="GbsResourceIT"
 
 Il servizio è esposto sulla porta 8080
 
+Sono state create le seguenti 3 API:
+
+GET /apis/gbs-banking-account-cash-v4.0?accountId={accountId}&fromAccountingDate={fromAccountingDate}&toAccountingDate={toAccountingDate}
+
+GET /apis/gbs-banking-account-cash-v4.0/{accountId}
+
+POST /apis/gbs-banking-payments-moneyTransfers-v4.0
+
 # myApp
 
 This application was generated using JHipster 8.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.1.0](https://www.jhipster.tech/documentation-archive/v8.1.0).
