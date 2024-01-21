@@ -17,7 +17,7 @@ public class ControllerAdviceException extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = { AccountIdNotFoundException.class, Api000Exception.class, DatesIntervalPreconditionFailedException.class })
-    public ResponseEntity<?> handleForbidden(final AbstractApiException apiException) {
+    public ResponseEntity<?> handle(final AbstractApiException apiException) {
         return new ResponseEntity<>(apiException.getBody(), apiException.geHttpStatus());
     }
 }
