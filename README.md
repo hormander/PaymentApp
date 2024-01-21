@@ -1,3 +1,58 @@
+## Work in progress
+
+Lo scheletro del progetto è stato creato usando il tool JHipster (https://www.jhipster.tech)
+
+# Nuovi file
+
+# Models
+
+src\main\java\com\mycompany\myapp\domain\AccountDisabled.java
+src\main\java\com\mycompany\myapp\domain\Accounts.java
+src\main\java\com\mycompany\myapp\domain\GbsBanking.java
+
+# Repositories
+
+src\main\java\com\mycompany\myapp\repository\AccountDisabledRepository.java
+src\main\java\com\mycompany\myapp\repository\AccountsRepository.java
+src\main\java\com\mycompany\myapp\repository\GbsBankingRepository.java
+
+# Services
+
+src\main\java\com\mycompany\myapp\service\impl\AccountDisabledServiceImpl.java
+src\main\java\com\mycompany\myapp\service\impl\GbsBankingServiceImpl.java
+
+# Controllers
+
+src\main\java\com\mycompany\myapp\web\rest\GbsResource.java
+src\main\java\com\mycompany\myapp\web\rest\ControllerAdviceException.java
+
+# Errors
+
+src\main\java\com\mycompany\myapp\web\rest\errors\AbstractApiException.java
+src\main\java\com\mycompany\myapp\web\rest\errors\AccountIdNotFoundException.java
+src\main\java\com\mycompany\myapp\web\rest\errors\Api000Exception.java
+src\main\java\com\mycompany\myapp\web\rest\errors\DatesIntervalPreconditionFailedException.java
+
+# Database
+
+Il database (utilizzare solo test) è H2 (in memory).
+Per la creazione e l'inizializzazione è stato usato liquibase.
+I file si trovano nel path:
+src\main\resources\config\liquibase
+
+# Test
+
+I test si trovano tutti all'interno del seguente file:
+src\test\java\com\mycompany\myapp\web\rest\GbsResourceIT.java
+
+# Comandi utili
+
+mvnw install
+mvnw spring-boot:run -Drun.profiles=dev (usare solo l'ambiente di sviluppo, prod non è testato)
+mvnw test -Dtest="GbsResourceIT"
+
+Il servizio è esposto sulla porta 8080
+
 # myApp
 
 This application was generated using JHipster 8.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.1.0](https://www.jhipster.tech/documentation-archive/v8.1.0).
