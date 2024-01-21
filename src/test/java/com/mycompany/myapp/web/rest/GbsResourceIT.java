@@ -224,6 +224,51 @@ class GbsResourceIT {
 
     @Test
     @Transactional
+    void findAllByAccountIdAndExecutionDateBetweenNoDate() throws Exception {
+        int databaseSizeBeforeTest = gbsBankingRepository.findAll().size();
+        // set the field null
+
+        restGbsBankingMockMvc
+            .perform(
+                get(
+                    ENTITY_API_URL +
+                    "/gbs-banking-account-cash-v4.0?accountId={id}&fromAccountingDate={fromAccountingDate}&toAccountingDate={toAccountingDate}",
+                    ENTITY_ACCOUNT_ID,
+                    null,
+                    null
+                )
+            )
+            .andExpect(status().isBadRequest());
+
+        assertThat(gbsBankingRepository.findAll()).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void findAllByAccountIdAndExecutionDateBetweenNoAccountId() throws Exception {
+        int databaseSizeBeforeTest = gbsBankingRepository.findAll().size();
+        // set the field null
+
+        LocalDate from = LocalDate.of(2018, 1, 1);
+        LocalDate to = LocalDate.of(2019, 12, 31);
+
+        restGbsBankingMockMvc
+            .perform(
+                get(
+                    ENTITY_API_URL +
+                    "/gbs-banking-account-cash-v4.0?accountId={id}&fromAccountingDate={fromAccountingDate}&toAccountingDate={toAccountingDate}",
+                    null,
+                    from,
+                    to
+                )
+            )
+            .andExpect(status().isBadRequest());
+
+        assertThat(gbsBankingRepository.findAll()).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void findAllByAccountIdAndExecutionDateBetweenDatesIntervalPreconditionFailed() throws Exception {
         int databaseSizeBeforeTest = gbsBankingRepository.findAll().size();
         // set the field null
