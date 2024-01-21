@@ -231,7 +231,7 @@ class GbsResourceIT {
         LocalDate from = LocalDate.of(2018, 1, 1);
         LocalDate to = LocalDate.of(2019, 12, 31);
 
-        restGbsBankingMockMvc
+        MvcResult result = restGbsBankingMockMvc
             .perform(
                 get(
                     ENTITY_API_URL +
@@ -241,7 +241,13 @@ class GbsResourceIT {
                     from
                 )
             )
-            .andExpect(status().isPreconditionFailed());
+            .andExpect(status().isPreconditionFailed())
+            .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+
+        String code = JsonPath.read(content, "$.code");
+        assertThat(code).isEqualTo("API000");
 
         assertThat(gbsBankingRepository.findAll()).hasSize(databaseSizeBeforeTest);
     }
@@ -395,13 +401,19 @@ class GbsResourceIT {
 
         gbsBankingDTO.setAccountId(generatedAccountId);
 
-        restGbsBankingMockMvc
+        MvcResult result = restGbsBankingMockMvc
             .perform(
                 post(ENTITY_API_URL + "/gbs-banking-payments-moneyTransfers-v4.0")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(gbsBankingDTO))
             )
-            .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound())
+            .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+
+        String code = JsonPath.read(content, "$.code");
+        assertThat(code).isEqualTo("API000");
 
         assertThat(gbsBankingRepository.findAll()).hasSize(databaseSizeBeforeCreate);
     }

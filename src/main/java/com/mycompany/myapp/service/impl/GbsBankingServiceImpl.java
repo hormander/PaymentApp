@@ -11,6 +11,7 @@ import com.mycompany.myapp.service.dto.GbsBankingDTO;
 import com.mycompany.myapp.service.mapper.GbsBankingMapper;
 import com.mycompany.myapp.web.rest.errors.AccountIdNotFoundException;
 import com.mycompany.myapp.web.rest.errors.Api000Exception;
+import com.mycompany.myapp.web.rest.errors.DatesIntervalPreconditionFailedException;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -154,6 +155,14 @@ public class GbsBankingServiceImpl implements GbsBankingService {
         LocalDate toAccountingDate
     ) {
         log.debug("Request to find all GbsBankingAccountCash for accountId : {}", accountId);
+
+        if (toAccountingDate.isBefore(fromAccountingDate)) {
+            String message = String.format("'To date' %s is less than 'from date' %s", toAccountingDate, fromAccountingDate);
+
+            log.warn(message);
+
+            throw new DatesIntervalPreconditionFailedException(message);
+        }
 
         if (accountsRepository.findOneByAccountId(accountId) == null) {
             String message = String.format("Account Id %s not found", accountId);
