@@ -12,10 +12,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ControllerAdviceException extends ResponseEntityExceptionHandler {
 
-    public ControllerAdviceException() {
-        super();
-    }
-
     @ExceptionHandler(value = { AccountIdNotFoundException.class, Api000Exception.class, DatesIntervalPreconditionFailedException.class })
     public ResponseEntity<?> handle(final AbstractApiException apiException) {
         return new ResponseEntity<>(apiException.getBody(), apiException.geHttpStatus());

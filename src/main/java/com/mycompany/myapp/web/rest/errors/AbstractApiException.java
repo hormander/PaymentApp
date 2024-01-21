@@ -10,10 +10,6 @@ public abstract class AbstractApiException extends RuntimeException {
 
     protected Map<String, Object> body = new HashMap<String, Object>();
 
-    public AbstractApiException() {
-        super();
-    }
-
     public AbstractApiException(final HttpStatus httpStatus, final String code, final String description) {
         super();
         this.httpStatus = httpStatus;
